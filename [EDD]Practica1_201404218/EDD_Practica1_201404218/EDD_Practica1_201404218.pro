@@ -26,11 +26,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    coladoblementeenlazada.cpp
+    coladoblementeenlazada.cpp \
+    colasimple.cpp \
+    listadoblementeenlazada.cpp
 
 HEADERS += \
         mainwindow.h \
-    coladoblementeenlazada.h
+    coladoblementeenlazada.h \
+    colasimple.h \
+    listadoblementeenlazada.h
 
 FORMS += \
         mainwindow.ui

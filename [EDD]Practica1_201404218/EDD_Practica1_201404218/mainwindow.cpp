@@ -28,71 +28,147 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_inicio_clicked()
 {
-    queue(cola,contador);
-    contador++;
+    //Limpia el contador de avionse
+    contadorAviones = 1;
+    contadorTurno = 1;
+    ui->textEdit->setText("");
+    //Obtener el número de aviones para la simulación
+    if(ui->txtAviones->toPlainText()==""){
+    }else{
+        numeroAviones = ui->txtAviones->toPlainText().toInt();
+    }
+    //Crear la lista de escritorios para la simulación
+    if(ui->txtEscritorios->toPlainText()==""){
+    }else{
+        crearLista(lista);
+        lista->numeroEscritorios = ui->txtEscritorios->toPlainText().toInt();
+        crearEscritorios(lista);
+        ui->textEdit->setText(escribirDOT(lista));
+    }
+
+
+    //Inicializar la cola doble de aviones
+    crearCola(cola);
+
 }
 
-void MainWindow::on_pushButton_4_clicked()
+void MainWindow::on_btnTurno_clicked()
 {
+    //Escribe en consola el turno actual
+    escribirEnConsola("///////////////Turno " +QString::number(contadorTurno) +"///////////////\n");
+    contadorTurno++;
+
+    //Si aún no se han creado todos los aviones, crear un avión nuevo
+    if(contadorAviones <= numeroAviones){
+        Avion * nuevo = crearAvion(contadorAviones);
+        queue(cola,nuevo);
+        escribirEnConsola("Arribó el avion número " +QString::number(contadorAviones) +".\n");
+        contadorAviones++;
+    }
+
+    mantenimiento(cola);
+    //graficar();
+}
+
+void MainWindow::on_btnImprimir_clicked()
+{
+    /*
     if(!esVacia(cola)){
         ui->textEdit->setText("");
         Nodo * aux = cola->primero;
         while (aux != NULL){
-            ui->textEdit->setText(ui->textEdit->toPlainText()+ QString::number(aux->valor)+"\n");
+            ui->textEdit->setText(ui->textEdit->toPlainText()+ QString::number(aux->avion->id)+"\n");
             aux = aux->siguiente;
         }
 
     }
-
+    ColaSimple * colasimple = new ColaSimple();
+    crearCola(colasimple);
+    crearCola(cola);
     ui->textEdit->setText(escribirDOT(cola));
+    */
+    graficar();
+}
+
+
+//MÉTODOS
+
+int MainWindow::escribirEnConsola(QString cadena){
+
+    QString actual = ui->textEdit->toPlainText();
+
+    actual += cadena;
+
+    ui->textEdit->setText(actual);
+
+    return 0;
+}
+
+int MainWindow::mantenimiento(ColaDoblementeEnlazada * cola){
+
+    if(cola->primero != NULL){
+        if(cola->primero->avion->desabordaje>0){
+
+            escribirEnConsola("Avión desbordando: " +QString::number(cola->primero->avion->id) +".\n");
+            cola->primero->avion->desabordaje--;
+        }else{
+
+            //Se crean los pasajeros del avion y se meten en la cola simple
+            for(int i = 1;i<=cola->primero->avion->pasajeros;i++){
+                Pasajero * pasajero = crearPasajero(contadorPasajeros,cola->primero->avion->id);
+                queue(colaSimple,pasajero);
+                contadorPasajeros++;
+            }
+
+            escribirEnConsola("Avión " +QString::number(cola->primero->avion->id) +" pasa a estacion de mantenimiento.\n");
+            dequeue(cola);
+        }
+    }
+    return 0;
 
 }
 
-void MainWindow::on_pushButton_2_clicked()
-{
-    dequeue(cola);
-}
+int MainWindow::graficar(){
 
-void MainWindow::on_pushButton_3_clicked()
-{
-    //crearCola(cola);
+    QString texto = "digraph G { \n";
+    texto += "node [shape=box,style=filled,color=black,fontcolor=white,fontname=\"Helvetica\"];\n";
+
+    texto += escribirDOT(cola);
+    texto += escribirDOT(colaSimple);
+
+    texto += "}";
 
 
-    /* Try and open a file for output */
+    //Abrir el archivo
     QString outputFilename = "Results.txt";
     QFile outputFile(outputFilename);
     outputFile.open(QIODevice::WriteOnly);
 
-    /* Check it opened OK */
-    if(!outputFile.isOpen()){
-        //qDebug() << argv[0] << "- Error, unable to open" << outputFilename << "for output";
-        //return 1;
-    }
-
-    /* Point a QTextStream object at the file */
+    //Apuntar un objeto QTextStream al archivo
     QTextStream outStream(&outputFile);
 
-    /* Write the line to the file */
-    //outStream << "digraph G {start_here [label=\"it's me(start here)\"];start_here -> 2017;bloglife1 [label=\"create more blog\"];bloglife2 [label=\"make more money\"];bloglife3 [label=\"become rich\"];life_goal1[label=\"married withsomeone\"];life_goal2[label=\"have a baby\"];life_goal3[label=\"happy life\"];2017 -> bloglife1 -> bloglife2 -> bloglife3;2017 -> life_goal1 -> life_goal2;node [shape=box,style=filled,color=\".7 .3 1.0\"];life_goal2 -> life_goal3}";
-    outStream << escribirDOT(cola);
-    /* Close the file */
+    //Escribir el texto al archivo
+    outStream << texto;
+
+    //Cerrar el archivo
     outputFile.close();
 
-    //CREA EL ARCHIVO PNG
+    //Crear el archivo .png
     QProcess process;
     process.start("dot -Tpng Results.txt -o diag.png");
     process.waitForFinished();
 
-    //LO CARGA A UN LABEL Y LO AJUSTA
+    //Cargar la imagen a un label y ajustarlo
     QPixmap pic("diag.png");
     ui->label->setPixmap(pic);
     //ui->label->setMask(pic.mask());
-
     //this->ui->label->setPixmap(pic.scaled(ui->label->size(),Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->label->adjustSize();
-    //ui->scrollArea->setBackgroundRole(QPalette::Dark);
     ui->scrollArea->setWidget(ui->label);
-    //ui->scrollArea->widget()->setLayout(ui->label);
+
+    return 0;
+
+
 }
