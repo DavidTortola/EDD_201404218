@@ -1,5 +1,5 @@
 #include "listadoblementeenlazada.h"
-
+#include <iostream>
 
 int crearLista(ListaDoblementeEnlazada * lista){
 
@@ -15,30 +15,21 @@ int insertar(ListaDoblementeEnlazada * lista, Escritorio *escritorio){
     ldNodo * nuevo = new ldNodo();
     nuevo->escritorio = escritorio;
 
-
     if(!esVacia(lista)){
-        ldNodo * aux = lista->primero;
 
-        while(aux != NULL){
-            if(nuevo->escritorio->id > aux->escritorio->id){
-             aux = aux->siguiente;
-            }else if(nuevo->escritorio->id < aux->escritorio->id){
+        lista->ultimo->siguiente = nuevo;
+        nuevo->anterior = lista->ultimo;
+        lista->ultimo = nuevo;
+        lista->length++;
 
-                nuevo->siguiente = aux;
-                nuevo->anterior = aux->anterior;
-                aux->anterior->siguiente = nuevo;
-                aux->anterior = nuevo;
-                lista->length++;
-                break;
-            }
-        }
     }else{
 
         lista->primero = nuevo;
         lista->ultimo = nuevo;
         lista->length++;
 
-    }
+}
+
 
     return 0;
 }
@@ -61,15 +52,71 @@ int getSize(ListaDoblementeEnlazada * lista){
 }
 
 QString escribirDOT(ListaDoblementeEnlazada * lista){
-    ldNodo * aux = lista->primero;
-    QString texto = "";
-    while(aux != NULL){
-        texto+=aux->escritorio->id + "\n";
-        aux = aux->siguiente;
+
+
+    QString texto = "subgraph cluster_2 { ";
+    texto += "label = \"Escritorios de registro\";\n";
+
+    //PARA DECLARAR LAS CABECERAS Y LABELS
+    if(!esVacia(lista)){
+        ldNodo * aux = lista->ultimo;
+        while (aux != NULL){
+            texto += "\"Escritorio " +QString(QChar::fromLatin1(aux->escritorio->id)) +"\"";
+            texto += "[label=\"Escritorio: " +QString(QChar::fromLatin1(aux->escritorio->id));
+            texto += "\" shape=record];\n";
+            aux = aux->anterior;
+        }
     }
-    texto += "a";
+    texto+="{rank=same;\n";
+
+    //PARA COLOCAR LAS RELACIONES
+    if(!esVacia(lista)){
+        ldNodo * aux = lista->primero;
+        while (aux != NULL){
+            if(aux->siguiente !=NULL){
+                texto += "\"Escritorio " +QString(QChar::fromLatin1(aux->escritorio->id)) + "\"->\"Escritorio " +QString(QChar::fromLatin1(aux->siguiente->escritorio->id)) + "\";\n";
+                texto += "\"Escritorio " +QString(QChar::fromLatin1(aux->siguiente->escritorio->id)) + "\"->\"Escritorio " +QString(QChar::fromLatin1(aux->escritorio->id)) + "\";\n";
+                aux = aux->siguiente;
+            }else{
+                aux = aux->siguiente;
+            }
+        }
+    }
+
+    texto += "}\n";
+    texto += "{";
+
+    //Para colocar los pasajeros en cada escritorio
+    if(!esVacia(lista)){
+
+        //SE RECORRE CADA UNO DE LOS ESCRITORIOS
+        ldNodo * aux = lista->primero;
+        while(aux != NULL){
+
+            if(aux->escritorio->cola->primero != NULL){
+
+                //SE RECORRE CADA PASAJERO EN ESTA COLA
+                csNodo * aux2 = aux->escritorio->cola->primero;
+                while (aux2 != NULL){
+                    texto += "\"Pasajero2 " +QString::number(aux2->pasajero->id) +"\"";
+                    texto += "[label=\"{<f0>Pasajero: " +QString::number(aux2->pasajero->id) +"|";
+                    texto += "<fi>Avion: " +QString::number(aux2->pasajero->avion) + "|";
+                    texto += "<f2>Maletas: " +QString::number(aux2->pasajero->maletas) +"|";
+                    texto += "<f3>Documentos: " +QString::number(aux2->pasajero->documentos) +"|";
+                    texto += "<f4>Turnos: " +QString::number(aux2->pasajero->numeroTurnos) +"";
+                    texto += "}\" shape=record];\n";
+                    aux2 = aux2->siguiente;
+                }
+            }
+            aux = aux->siguiente;
+        }
+     }
+
+    texto += "}\n}\n";
     return texto;
 }
+
+
 
 Escritorio * crearEscritorio(char id_){
 
@@ -82,12 +129,44 @@ Escritorio * crearEscritorio(char id_){
 
 }
 
-int crearEscritorios(ListaDoblementeEnlazada * lista){
-    if(lista->numeroEscritorios>0){
-        for(int i = 0; i<lista->numeroEscritorios;i++){
-            char id = (i+65);
-            Escritorio * escritorio_ = crearEscritorio(id);
-            insertar(lista,escritorio_);
+int crearEscritorios(ListaDoblementeEnlazada * lista, int cantidad){
+
+    for(int i = 0;i<cantidad;i++){
+
+        insertar(lista,crearEscritorio(i+65));
+
+    }
+
+    return 0;
+}
+
+int espaciosVacios(ListaDoblementeEnlazada * lista){
+    int contador = 0;
+    if(!esVacia(lista)){
+        ldNodo * aux = lista->primero;
+
+        while(aux!=NULL){
+            contador++;
+            aux = aux->siguiente;
+        }
+
+
+    }
+    return contador;
+
+}
+
+int ingresar(ListaDoblementeEnlazada * lista, Pasajero * pasajero){
+
+    if(!esVacia(lista)){
+        ldNodo*aux = lista->primero;
+        while(aux!=NULL){
+            if(aux->escritorio->cola->length<10){
+                queue(aux->escritorio->cola,pasajero);
+                break;
+            }else{
+                aux = aux->siguiente;
+            }
         }
     }
     return 0;

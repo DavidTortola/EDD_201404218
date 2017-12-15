@@ -22,6 +22,7 @@ int queue(ColaDoblementeEnlazada * cola, Avion *avion_){
     if(!esVacia(cola)){
 
         cola->ultimo->siguiente = nuevo;
+        nuevo->anterior = cola->ultimo;
         cola->ultimo = nuevo;
         cola->length++;
 
@@ -131,6 +132,7 @@ QString escribirDOT(ColaDoblementeEnlazada * cola){
         while (aux != NULL){
             if(aux->siguiente !=NULL){
                 texto += "\"Avion " +QString::number(aux->avion->id) + "\"->\"Avion " +QString::number(aux->siguiente->avion->id) + "\";\n";
+                texto += "\"Avion " +QString::number(aux->siguiente->avion->id) + "\"->\"Avion " +QString::number(aux->avion->id) + "\";\n";
                 aux = aux->siguiente;
             }else{
                 aux = aux->siguiente;

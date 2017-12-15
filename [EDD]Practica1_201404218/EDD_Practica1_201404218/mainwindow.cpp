@@ -15,6 +15,8 @@
 #include <QBitmap>
 
 
+#include <iostream>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -30,22 +32,33 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_inicio_clicked()
 {
-    //Limpia el contador de avionse
+
+
+    //Limpia el contador de aviones
     contadorAviones = 1;
     contadorTurno = 1;
     ui->textEdit->setText("");
+
+
     //Obtener el número de aviones para la simulación
     if(ui->txtAviones->toPlainText()==""){
     }else{
         numeroAviones = ui->txtAviones->toPlainText().toInt();
     }
+
+
+    //Inicializar la lista de escritorios
+    crearLista(listaEscritorios);
+
+
     //Crear la lista de escritorios para la simulación
     if(ui->txtEscritorios->toPlainText()==""){
     }else{
-        crearLista(lista);
-        lista->numeroEscritorios = ui->txtEscritorios->toPlainText().toInt();
-        crearEscritorios(lista);
-        ui->textEdit->setText(escribirDOT(lista));
+
+        crearEscritorios(listaEscritorios,ui->txtEscritorios->toPlainText().toInt());
+        listaEscritorios->numeroEscritorios = ui->txtEscritorios->toPlainText().toInt();
+        ui->textEdit->setText(escribirDOT(listaEscritorios));
+
     }
 
 
@@ -68,32 +81,92 @@ void MainWindow::on_btnTurno_clicked()
         contadorAviones++;
     }
 
-    mantenimiento(cola);
-    //graficar();
+
+    //Aplica desabordaje a la cola de aviones
+    desabordaje(cola);
+
+    //Revisa si auto esta checkeado para graficar
+    if(ui->checkBox->isChecked()){
+        graficar();
+    }
+
 }
 
 void MainWindow::on_btnImprimir_clicked()
 {
-    /*
-    if(!esVacia(cola)){
-        ui->textEdit->setText("");
-        Nodo * aux = cola->primero;
-        while (aux != NULL){
-            ui->textEdit->setText(ui->textEdit->toPlainText()+ QString::number(aux->avion->id)+"\n");
-            aux = aux->siguiente;
-        }
-
-    }
-    ColaSimple * colasimple = new ColaSimple();
-    crearCola(colasimple);
-    crearCola(cola);
-    ui->textEdit->setText(escribirDOT(cola));
-    */
     graficar();
+    registrarPasajeros();
 }
 
 
 //MÉTODOS
+
+int MainWindow::registrarPasajeros(){
+
+    ldNodo * aux = listaEscritorios->primero;
+    while(aux != NULL){
+        if(aux->escritorio->cola->length<10){
+            //Enviar pasajeros hasta llegar a 10 o quedarse sin pasajeros
+            aux = aux->siguiente;
+        }else{
+            aux = aux->siguiente;
+        }
+    }
+
+
+
+
+
+
+    /*
+    if(!esVacia(colaSimple)){
+        if(espaciosVacios(listaEscritorios)>0){
+
+            for(int i = 0;i<espaciosVacios(listaEscritorios);i++){
+
+                if(primero(colaSimple)!=0){
+                    ingresar(listaEscritorios, primero(colaSimple));
+                }
+
+            }
+
+        }
+
+
+    }
+
+    */
+    /*ldNodo * aux = listaEscritorios->primero;
+    while(aux != NULL){
+
+        csNodo * aux2 = aux->escritorio->cola->primero;
+        while(aux2 != NULL){
+
+            std::cout << aux2->pasajero->maletas << endl;
+            aux2 = aux2->siguiente;
+        }
+        aux = aux->siguiente;
+    }
+    */
+
+
+    /*
+    if(listaEscritorios->primero->escritorio->cola->primero != NULL){
+     std::cout << "lleno"<<std::endl;
+     std::cout << listaEscritorios->primero->escritorio->cola->primero->pasajero->id<<std::endl;
+     std::cout << listaEscritorios->primero->escritorio->cola->primero->pasajero->avion<<std::endl;
+     std::cout << listaEscritorios->primero->escritorio->cola->primero->pasajero->numeroTurnos<<std::endl<<std::endl;
+     std::cout << listaEscritorios->primero->siguiente->escritorio->cola->primero->pasajero->id<<std::endl;
+     std::cout << listaEscritorios->primero->siguiente->escritorio->cola->primero->pasajero->avion<<std::endl;
+     std::cout << listaEscritorios->primero->siguiente->escritorio->cola->primero->pasajero->numeroTurnos<<std::endl;
+    }else{
+        std::cout<<"vacio"<<std::endl;
+    }
+
+    */
+
+    return 0;
+}
 
 int MainWindow::escribirEnConsola(QString cadena){
 
@@ -106,7 +179,7 @@ int MainWindow::escribirEnConsola(QString cadena){
     return 0;
 }
 
-int MainWindow::mantenimiento(ColaDoblementeEnlazada * cola){
+int MainWindow::desabordaje(ColaDoblementeEnlazada * cola){
 
     if(cola->primero != NULL){
         if(cola->primero->avion->desabordaje>0){
@@ -133,10 +206,11 @@ int MainWindow::mantenimiento(ColaDoblementeEnlazada * cola){
 int MainWindow::graficar(){
 
     QString texto = "digraph G { \n";
-    texto += "node [shape=box,style=filled,color=black,fontcolor=white,fontname=\"Helvetica\"];\n";
+    texto += "node [shape=box,style=filled,color=black,fontcolor=white,fontname=\"Helvetica\"]; \n";
 
     texto += escribirDOT(cola);
     texto += escribirDOT(colaSimple);
+    texto += escribirDOT(listaEscritorios);
 
     texto += "}";
 

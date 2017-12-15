@@ -5,6 +5,7 @@
 #include "coladoblementeenlazada.h"
 #include "colasimple.h"
 #include "listadoblementeenlazada.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -27,13 +28,15 @@ public:
     int contadorPasajeros = 1;
 
     //Lista de escritorios
-    ListaDoblementeEnlazada * lista = new ListaDoblementeEnlazada();
+    ListaDoblementeEnlazada * listaEscritorios = new ListaDoblementeEnlazada();
 
 
     //Métodos
     int graficar();
     int escribirEnConsola(QString cadena);
-    int mantenimiento(ColaDoblementeEnlazada * cola);
+    int desabordaje(ColaDoblementeEnlazada * cola);
+    int registrarPasajeros();
+
 
     //END OF USER'S CODE
 
