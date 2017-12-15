@@ -40,6 +40,6 @@ int getSize(ListaDoblementeEnlazada * lista);
 QString escribirDOT(ListaDoblementeEnlazada * lista);
 Escritorio * crearEscritorio(ListaDoblementeEnlazada * lista, char id_);
 int crearEscritorios(ListaDoblementeEnlazada * lista, int cantidad);
-int ingresar(ListaDoblementeEnlazada * lista, Pasajero * pasajero);
+int ingresar(ColaSimple *cola, Pasajero * pasajero);
 int espaciosVacios(ListaDoblementeEnlazada * lista);
 #endif // LISTADOBLEMENTEENLAZADA_H

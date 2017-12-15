@@ -85,10 +85,15 @@ void MainWindow::on_btnTurno_clicked()
     //Aplica desabordaje a la cola de aviones
     desabordaje(cola);
 
+    registrarPasajeros();
+
+    atender();
     //Revisa si auto esta checkeado para graficar
     if(ui->checkBox->isChecked()){
         graficar();
     }
+
+
 
 }
 
@@ -105,68 +110,53 @@ int MainWindow::registrarPasajeros(){
 
     ldNodo * aux = listaEscritorios->primero;
     while(aux != NULL){
+
         if(aux->escritorio->cola->length<10){
             //Enviar pasajeros hasta llegar a 10 o quedarse sin pasajeros
+            while(primero(colaSimple)!=0 && aux->escritorio->cola->length<10){
+                //ENVIAR PASAJERO
+                //SACAR PASAJERO
+                //ingresar(aux->escritorio->cola,primero(colaSimple));
+
+                queue(aux->escritorio->cola,primero(colaSimple));
+
+                dequeue(colaSimple);
+            }
             aux = aux->siguiente;
+
         }else{
+
             aux = aux->siguiente;
+
         }
     }
 
+    return 0;
+}
 
+int MainWindow::atender(){
 
+    ldNodo * aux = listaEscritorios->primero;
+    while(aux != NULL){
 
+        if(aux->escritorio->cola->primero != NULL){
+            if(aux->escritorio->cola->primero->pasajero->numeroTurnos>0){
 
-
-    /*
-    if(!esVacia(colaSimple)){
-        if(espaciosVacios(listaEscritorios)>0){
-
-            for(int i = 0;i<espaciosVacios(listaEscritorios);i++){
-
-                if(primero(colaSimple)!=0){
-                    ingresar(listaEscritorios, primero(colaSimple));
-                }
-
+                aux->escritorio->cola->primero->pasajero->numeroTurnos--;
+            }else{
+                dequeue(aux->escritorio->cola);
             }
 
         }
 
-
-    }
-
-    */
-    /*ldNodo * aux = listaEscritorios->primero;
-    while(aux != NULL){
-
-        csNodo * aux2 = aux->escritorio->cola->primero;
-        while(aux2 != NULL){
-
-            std::cout << aux2->pasajero->maletas << endl;
-            aux2 = aux2->siguiente;
-        }
         aux = aux->siguiente;
+
+
     }
-    */
-
-
-    /*
-    if(listaEscritorios->primero->escritorio->cola->primero != NULL){
-     std::cout << "lleno"<<std::endl;
-     std::cout << listaEscritorios->primero->escritorio->cola->primero->pasajero->id<<std::endl;
-     std::cout << listaEscritorios->primero->escritorio->cola->primero->pasajero->avion<<std::endl;
-     std::cout << listaEscritorios->primero->escritorio->cola->primero->pasajero->numeroTurnos<<std::endl<<std::endl;
-     std::cout << listaEscritorios->primero->siguiente->escritorio->cola->primero->pasajero->id<<std::endl;
-     std::cout << listaEscritorios->primero->siguiente->escritorio->cola->primero->pasajero->avion<<std::endl;
-     std::cout << listaEscritorios->primero->siguiente->escritorio->cola->primero->pasajero->numeroTurnos<<std::endl;
-    }else{
-        std::cout<<"vacio"<<std::endl;
-    }
-
-    */
 
     return 0;
 }
+
 
 int MainWindow::escribirEnConsola(QString cadena){
 

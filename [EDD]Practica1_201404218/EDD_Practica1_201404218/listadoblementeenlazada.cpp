@@ -19,6 +19,7 @@ int insertar(ListaDoblementeEnlazada * lista, Escritorio *escritorio){
 
         lista->ultimo->siguiente = nuevo;
         nuevo->anterior = lista->ultimo;
+        nuevo->siguiente = NULL;
         lista->ultimo = nuevo;
         lista->length++;
 
@@ -107,6 +108,20 @@ QString escribirDOT(ListaDoblementeEnlazada * lista){
                     texto += "}\" shape=record];\n";
                     aux2 = aux2->siguiente;
                 }
+                csNodo * aux3 = aux->escritorio->cola->primero;
+
+                if(aux3!=NULL){
+                    texto += "\"Escritorio " +QString(QChar::fromLatin1(aux->escritorio->id)) + "\"->\"Pasajero2 "+QString::number(aux3->pasajero->id) +"\";";
+                }
+
+
+                while(aux3->siguiente != NULL){
+
+                    texto += "\"Pasajero2 " +QString::number(aux3->pasajero->id) +"\"->\"Pasajero2 " +QString::number(aux3->siguiente->pasajero->id) +"\";";
+                    aux3 = aux3->siguiente;
+                }
+
+
             }
             aux = aux->siguiente;
         }
@@ -156,18 +171,11 @@ int espaciosVacios(ListaDoblementeEnlazada * lista){
 
 }
 
-int ingresar(ListaDoblementeEnlazada * lista, Pasajero * pasajero){
+int ingresar(ColaSimple * cola, Pasajero * pasajero){
 
-    if(!esVacia(lista)){
-        ldNodo*aux = lista->primero;
-        while(aux!=NULL){
-            if(aux->escritorio->cola->length<10){
-                queue(aux->escritorio->cola,pasajero);
-                break;
-            }else{
-                aux = aux->siguiente;
-            }
-        }
-    }
+    std::cout << "aqui" << std::endl;
+    std::cout << cola->primero << std::endl;
+    std::cout << "aqui no xd " << std::endl;
+    queue(cola,pasajero);
     return 0;
 }

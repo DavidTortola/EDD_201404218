@@ -36,7 +36,7 @@ public:
     int escribirEnConsola(QString cadena);
     int desabordaje(ColaDoblementeEnlazada * cola);
     int registrarPasajeros();
-
+    int atender();
 
     //END OF USER'S CODE
 
