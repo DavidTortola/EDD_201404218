@@ -46,4 +46,6 @@ int crearEscritorios(ListaDoblementeEnlazada * lista, int cantidad);
 int ingresar(ColaSimple *cola, Pasajero * pasajero);
 int espaciosVacios(ListaDoblementeEnlazada * lista);
 QString escribirInformacion(ListaDoblementeEnlazada * lista);
+
+
 #endif // LISTADOBLEMENTEENLAZADA_H

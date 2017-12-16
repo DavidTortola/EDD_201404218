@@ -121,7 +121,8 @@ QString escribirDOT(ColaDoblementeEnlazada * cola){
             texto += "\"[label=\"{<f0>Avion: " +QString::number(aux->avion->id) + "|";
             texto += "<f1>Tipo: " +aux->avion->tipo +"|";
             texto += "<f2>Desbordaje: " +QString::number(aux->avion->desabordaje) +"|";
-            texto += "<f3>Pasajeros: " +QString::number(aux->avion->pasajeros);
+            texto += "<f3>Pasajeros: " +QString::number(aux->avion->pasajeros) +"|";
+            texto += "<f4>Mantenimiento: " +QString::number(aux->avion->mantenimiento);
             texto +="}\" shape=record];\n";
             aux = aux->siguiente;
         }

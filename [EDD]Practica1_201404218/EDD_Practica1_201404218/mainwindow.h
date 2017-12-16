@@ -6,7 +6,8 @@
 #include "colasimple.h"
 #include "listadoblementeenlazada.h"
 #include "listadoblecircular.h"
-
+#include "colasimpleaviones.h"
+#include "listasimple.h"
 
 namespace Ui {
 class MainWindow;
@@ -35,6 +36,11 @@ public:
     //Lista doble circular de maletas
     ListaDobleCircular * listaMaletas =  new ListaDobleCircular();
 
+    //Cola simple de aviones en mantenimiento
+    ColaSimpleAviones * colaAviones = new ColaSimpleAviones();
+
+    //Lista simple de estaciones de servicio
+    ListaSimple * listaMantenimiento = new ListaSimple();
 
     //Métodos
     int graficar();
@@ -42,6 +48,7 @@ public:
     int desabordaje(ColaDoblementeEnlazada * cola);
     int registrarPasajeros();
     int atender();
+    int darMantenimiento();
 
     //END OF USER'S CODE
 

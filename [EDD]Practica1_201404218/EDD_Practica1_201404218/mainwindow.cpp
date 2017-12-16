@@ -66,42 +66,66 @@ void MainWindow::on_inicio_clicked()
     crearCola(cola);
 
 
+    //Inicializar la lista de estaciones de servicio
+    crearLista(listaMantenimiento);
+
+    //Llenar la lista de estaciones con la cantidad ingresada
+    if(ui->txtMantenimiento->toPlainText()==""){
+
+    }else{
+        crearEstaciones(listaMantenimiento,ui->txtMantenimiento->toPlainText().toInt());
+    }
+
+
 }
 
 void MainWindow::on_btnTurno_clicked()
 {
-    //Escribe en consola el turno actual
-    escribirEnConsola("/////////////////Turno " +QString::number(contadorTurno) +"////////////////\n");
-    contadorTurno++;
+    if(ui->txtTurnos->toPlainText()!= ""){
+        if(ui->txtTurnos->toPlainText().toInt()>0){
 
-    //Si aún no se han creado todos los aviones, crear un avión nuevo
-    if(contadorAviones <= numeroAviones){
-        Avion * nuevo = crearAvion(contadorAviones);
-        queue(cola,nuevo);
-        escribirEnConsola("Arribó el avion número " +QString::number(contadorAviones) +".\n");
-        contadorAviones++;
-    }
+            //Escribe en consola el turno actual
+            escribirEnConsola("/////////////////Turno " +QString::number(contadorTurno) +"////////////////\n");
+            contadorTurno++;
 
-
-    //Aplica desabordaje a la cola de aviones
-    desabordaje(cola);
-
-    registrarPasajeros();
-
-    atender();
-
-    escribirEnConsola("Pasajeros en cola para ser atendidos: " +QString::number(colaSimple->length)+".\n");
-
-    escribirEnConsola(escribirInformacion(listaEscritorios));
-
-    escribirEnConsola("Cantidad de maletas en el sistema: " +QString::number(listaMaletas->length)+".\n");
-
-    escribirEnConsola("///////////////Fin turno " +QString::number(contadorTurno-1) +"///////////////\n");
+            //Si aún no se han creado todos los aviones, crear un avión nuevo
+            if(contadorAviones <= numeroAviones){
+                Avion * nuevo = crearAvion(contadorAviones);
+                queue(cola,nuevo);
+                escribirEnConsola("Arribó el avion número " +QString::number(contadorAviones) +".\n");
+                contadorAviones++;
+            }
 
 
-    //Revisa si auto esta checkeado para graficar
-    if(ui->checkBox->isChecked()){
-        graficar();
+            //Aplica desabordaje a la cola de aviones
+            desabordaje(cola);
+
+            registrarPasajeros();
+
+            atender();
+
+            darMantenimiento();
+
+            escribirEnConsola("Pasajeros en cola para ser atendidos: " +QString::number(colaSimple->length)+".\n");
+
+            escribirEnConsola(escribirInformacion(listaEscritorios));
+
+            escribirEnConsola("Cantidad de maletas en el sistema: " +QString::number(listaMaletas->length)+".\n");
+
+            escribirEnConsola(escribirInformacion(listaMantenimiento));
+
+            escribirEnConsola("///////////////Fin turno " +QString::number(contadorTurno-1) +"///////////////\n");
+
+
+            //Revisa si auto esta checkeado para graficar
+            if(ui->checkBox->isChecked()){
+                graficar();
+            }
+
+            ui->txtTurnos->setText(QString::number(ui->txtTurnos->toPlainText().toInt()-1));
+
+
+        }
     }
 
 }
@@ -212,6 +236,7 @@ int MainWindow::desabordaje(ColaDoblementeEnlazada * cola){
             }
 
             escribirEnConsola("Avión " +QString::number(cola->primero->avion->id) +" pasa a estacion de mantenimiento.\n");
+            queue(colaAviones,cola->primero->avion);
             dequeue(cola);
         }
     }
@@ -228,6 +253,8 @@ int MainWindow::graficar(){
     texto += escribirDOT(colaSimple);
     texto += escribirDOT(listaEscritorios);
     texto += escribirDOT(listaMaletas);
+    texto += escribirDOT(colaAviones);
+    texto += escribirDOT(listaMantenimiento);
     texto += "}";
 
 
@@ -261,4 +288,43 @@ int MainWindow::graficar(){
     return 0;
 
 
+}
+
+
+int MainWindow::darMantenimiento(){
+
+
+    //Recorre la lista de estaciones buscando una vacía
+    sNodo * aux = listaMantenimiento->primero;
+    while(aux != NULL){
+
+        //Si hay una que no tiene avion, le asigna uno
+        if(aux->avion == NULL){
+
+            //Valida que aun haya aviones esperando
+            if(colaAviones->primero != NULL){
+                aux->avion = colaAviones->primero->avion;
+                dequeue(colaAviones);
+             }
+
+            aux = aux->siguiente;
+        //Si ya tiene un avion
+        }else{
+
+            //Si al avion le faltan turnos, le resta uno
+            if(aux->avion->mantenimiento > 0){
+
+                aux->avion->mantenimiento--;
+                aux = aux->siguiente;
+            //Si ya no le restan turnos, elimina al avion
+            }else{
+                aux->avion = NULL;
+                aux = aux->siguiente;
+            }
+        }
+    }
+
+
+
+    return 0;
 }

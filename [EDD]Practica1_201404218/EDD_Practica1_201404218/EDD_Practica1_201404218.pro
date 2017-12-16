@@ -30,7 +30,9 @@ SOURCES += \
     colasimple.cpp \
     listadoblementeenlazada.cpp \
     listadoblecircular.cpp \
-    pila.cpp
+    pila.cpp \
+    listasimple.cpp \
+    colasimpleaviones.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,7 +40,9 @@ HEADERS += \
     colasimple.h \
     listadoblementeenlazada.h \
     listadoblecircular.h \
-    pila.h
+    pila.h \
+    listasimple.h \
+    colasimpleaviones.h
 
 FORMS += \
         mainwindow.ui

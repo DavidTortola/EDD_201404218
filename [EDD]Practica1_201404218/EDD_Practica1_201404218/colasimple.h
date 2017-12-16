@@ -6,11 +6,13 @@
 typedef struct ColaSimple ColaSimple;
 typedef struct csNodo csNodo;
 typedef struct Pasajero Pasajero;
+
 struct ColaSimple{
     csNodo * primero;
     csNodo * ultimo;
     int length;
 };
+
 struct csNodo{
 
     csNodo * siguiente;
