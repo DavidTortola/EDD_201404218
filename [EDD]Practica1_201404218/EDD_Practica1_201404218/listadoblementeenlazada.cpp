@@ -3,19 +3,23 @@
 
 int crearLista(ListaDoblementeEnlazada * lista){
 
+
     lista->primero = NULL;
     lista->ultimo = NULL;
     lista->length = 0;
     lista->numeroEscritorios = 0;
+
     return 0;
 }
 
+//MÉTODO DE INSERCIÓN CON ORDENAMIENTO
 int insertar(ListaDoblementeEnlazada * lista, Escritorio *escritorio){
-
+    /*
     ldNodo * nuevo = new ldNodo();
     nuevo->escritorio = escritorio;
 
     if(!esVacia(lista)){
+
 
         lista->ultimo->siguiente = nuevo;
         nuevo->anterior = lista->ultimo;
@@ -32,7 +36,59 @@ int insertar(ListaDoblementeEnlazada * lista, Escritorio *escritorio){
 }
 
 
+    return 0;*/
+
+
+
+    ldNodo * nuevo = new ldNodo();
+    nuevo->escritorio = escritorio;
+
+    if(!esVacia(lista)){
+
+        ldNodo * aux = new ldNodo();
+        aux = lista->primero;
+        while(nuevo->escritorio->id<aux->escritorio->id && aux!=NULL){
+            aux = aux->siguiente;
+        }
+        if(aux!=NULL){
+        if(aux->anterior != NULL){
+            nuevo->siguiente = aux;
+            nuevo->anterior = aux->anterior;
+            aux->anterior->siguiente = nuevo;
+            aux->anterior = nuevo;
+            lista->length++;
+        }else{
+
+            nuevo->siguiente = aux;
+            aux->anterior = nuevo;
+            lista->primero = nuevo;
+            lista->length++;
+
+
+        }
+        }else{
+
+            lista->ultimo->siguiente = nuevo;
+            nuevo->anterior = lista->ultimo;
+            nuevo->siguiente = NULL;
+            lista->ultimo = nuevo;
+            lista->length++;
+        }
+
+
+    }else{
+
+        lista->primero = nuevo;
+        lista->ultimo = nuevo;
+        lista->length++;
+
+    }
+
+
     return 0;
+
+
+
 }
 
 int eliminar(ListaDoblementeEnlazada * lista);
@@ -54,7 +110,6 @@ int getSize(ListaDoblementeEnlazada * lista){
 
 QString escribirDOT(ListaDoblementeEnlazada * lista){
 
-
     QString texto = "subgraph cluster_2 { ";
     texto += "label = \"Escritorios de registro\";\n";
 
@@ -63,8 +118,24 @@ QString escribirDOT(ListaDoblementeEnlazada * lista){
         ldNodo * aux = lista->ultimo;
         while (aux != NULL){
             texto += "\"Escritorio " +QString(QChar::fromLatin1(aux->escritorio->id)) +"\"";
-            texto += "[label=\"Escritorio: " +QString(QChar::fromLatin1(aux->escritorio->id));
-            texto += "\" shape=record];\n";
+            texto += "[label=\"{<f0>Escritorio: " +QString(QChar::fromLatin1(aux->escritorio->id)) +"|";
+
+            if(aux->escritorio->cola->primero != NULL){
+
+                texto += "<f1>Ocupado? Si|";
+                texto += "<f2>Pasajero atendido: " +QString::number(aux->escritorio->cola->primero->pasajero->id) +"|";
+                texto += "<f3>Documentos: " +QString::number(aux->escritorio->pilaDocumentos->length) +"|";
+                texto += "<f4>Turnos: " +QString::number(aux->escritorio->cola->primero->pasajero->numeroTurnos);
+
+            }else{
+                texto += "<f1>Ocupado? No|";
+                texto += "<f3>Documentos: 0";
+            }
+
+
+
+
+            texto += "}\" shape=record];\n";
             aux = aux->anterior;
         }
     }
@@ -131,14 +202,14 @@ QString escribirDOT(ListaDoblementeEnlazada * lista){
     return texto;
 }
 
-
-
 Escritorio * crearEscritorio(char id_){
 
     Escritorio * nuevo = new Escritorio();
     nuevo->id = id_;
     nuevo->cola = new ColaSimple();
     crearCola(nuevo->cola);
+    nuevo->pilaDocumentos = new Pila();
+    crearPila(nuevo->pilaDocumentos);
 
     return nuevo;
 
@@ -178,4 +249,35 @@ int ingresar(ColaSimple * cola, Pasajero * pasajero){
     std::cout << "aqui no xd " << std::endl;
     queue(cola,pasajero);
     return 0;
+}
+
+QString escribirInformacion(ListaDoblementeEnlazada * lista){
+
+    QString texto = "-------Escritorios de registro------\n";
+
+    if(!esVacia(lista)){
+        //RECORRE LOS ESCRITORIOS
+        ldNodo * aux = lista->primero;
+        while (aux != NULL){
+
+            texto += "Escritorio " + QString(QChar::fromLatin1(aux->escritorio->id)) +"\n";
+
+
+            if(aux->escritorio->cola->primero != NULL){
+
+                texto += "        Ocupado? Si \n";
+                texto += "        Pasajero atendido: " +QString::number(aux->escritorio->cola->primero->pasajero->id) +"\n";
+                texto += "        Documentos: " +QString::number(aux->escritorio->pilaDocumentos->length) +"\n";
+                texto += "        Turnos: " +QString::number(aux->escritorio->cola->primero->pasajero->numeroTurnos) +"\n";
+
+            }else{
+                texto += "        Ocupado? No\n";
+                texto += "        Documentos: 0\n";
+            }
+            aux = aux->siguiente;
+        }
+    }
+
+    texto += "-----------------------------------\n";
+    return texto;
 }

@@ -28,13 +28,17 @@ SOURCES += \
         mainwindow.cpp \
     coladoblementeenlazada.cpp \
     colasimple.cpp \
-    listadoblementeenlazada.cpp
+    listadoblementeenlazada.cpp \
+    listadoblecircular.cpp \
+    pila.cpp
 
 HEADERS += \
         mainwindow.h \
     coladoblementeenlazada.h \
     colasimple.h \
-    listadoblementeenlazada.h
+    listadoblementeenlazada.h \
+    listadoblecircular.h \
+    pila.h
 
 FORMS += \
         mainwindow.ui

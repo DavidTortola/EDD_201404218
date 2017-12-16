@@ -5,6 +5,8 @@
 #include "coladoblementeenlazada.h"
 #include "colasimple.h"
 #include "listadoblementeenlazada.h"
+#include "listadoblecircular.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -29,6 +31,9 @@ public:
 
     //Lista de escritorios
     ListaDoblementeEnlazada * listaEscritorios = new ListaDoblementeEnlazada();
+
+    //Lista doble circular de maletas
+    ListaDobleCircular * listaMaletas =  new ListaDobleCircular();
 
 
     //Métodos

@@ -2,6 +2,7 @@
 #define LISTADOBLEMENTEENLAZADA_H
 
 #include "colasimple.h"
+#include "pila.h"
 
 typedef struct ListaDoblementeEnlazada ListaDoblementeEnlazada;
 typedef struct ldNodo ldNodo;
@@ -13,6 +14,7 @@ struct ListaDoblementeEnlazada{
     ldNodo * ultimo;
     int length;
     int numeroEscritorios;
+
 
 };
 
@@ -28,6 +30,7 @@ struct Escritorio{
 
     char id;
     ColaSimple * cola;
+    Pila * pilaDocumentos;
 
 
 };
@@ -42,4 +45,5 @@ Escritorio * crearEscritorio(ListaDoblementeEnlazada * lista, char id_);
 int crearEscritorios(ListaDoblementeEnlazada * lista, int cantidad);
 int ingresar(ColaSimple *cola, Pasajero * pasajero);
 int espaciosVacios(ListaDoblementeEnlazada * lista);
+QString escribirInformacion(ListaDoblementeEnlazada * lista);
 #endif // LISTADOBLEMENTEENLAZADA_H

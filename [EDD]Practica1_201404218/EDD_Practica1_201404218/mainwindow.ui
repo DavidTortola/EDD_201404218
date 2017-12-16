@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1050</width>
+    <width>1169</width>
     <height>534</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>190</y>
-      <width>511</width>
+      <width>391</width>
       <height>281</height>
      </rect>
     </property>
@@ -92,7 +92,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>110</y>
+      <y>160</y>
       <width>89</width>
       <height>25</height>
      </rect>
@@ -104,9 +104,9 @@
    <widget class="QScrollArea" name="scrollArea">
     <property name="geometry">
      <rect>
-      <x>530</x>
+      <x>420</x>
       <y>0</y>
-      <width>511</width>
+      <width>731</width>
       <height>471</height>
      </rect>
     </property>
@@ -118,7 +118,7 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>509</width>
+       <width>729</width>
        <height>469</height>
       </rect>
      </property>
@@ -127,21 +127,21 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>30</y>
+      <x>330</x>
+      <y>10</y>
       <width>67</width>
       <height>17</height>
      </rect>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="btnTurno">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>80</y>
+      <y>130</y>
       <width>89</width>
       <height>25</height>
      </rect>
@@ -154,7 +154,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>20</y>
       <width>104</width>
       <height>31</height>
      </rect>
@@ -164,7 +164,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>50</y>
+      <y>100</y>
       <width>141</width>
       <height>25</height>
      </rect>
@@ -176,9 +176,9 @@
    <widget class="QTextEdit" name="txtEscritorios">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>10</y>
-      <width>111</width>
+      <x>10</x>
+      <y>60</y>
+      <width>101</width>
       <height>31</height>
      </rect>
     </property>
@@ -187,7 +187,7 @@
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>80</y>
+      <y>130</y>
       <width>92</width>
       <height>23</height>
      </rect>
@@ -196,13 +196,39 @@
      <string>auto</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>30</y>
+      <width>67</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Aviones</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>70</y>
+      <width>67</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Escritorios</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1050</width>
+     <width>1169</width>
      <height>22</height>
     </rect>
    </property>

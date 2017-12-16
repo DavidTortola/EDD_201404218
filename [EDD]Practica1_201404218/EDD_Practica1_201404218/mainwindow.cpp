@@ -57,20 +57,21 @@ void MainWindow::on_inicio_clicked()
 
         crearEscritorios(listaEscritorios,ui->txtEscritorios->toPlainText().toInt());
         listaEscritorios->numeroEscritorios = ui->txtEscritorios->toPlainText().toInt();
-        ui->textEdit->setText(escribirDOT(listaEscritorios));
-
     }
 
+    //Inicializar la lista doble de maletas
+    crearLista(listaMaletas);
 
     //Inicializar la cola doble de aviones
     crearCola(cola);
+
 
 }
 
 void MainWindow::on_btnTurno_clicked()
 {
     //Escribe en consola el turno actual
-    escribirEnConsola("///////////////Turno " +QString::number(contadorTurno) +"///////////////\n");
+    escribirEnConsola("/////////////////Turno " +QString::number(contadorTurno) +"////////////////\n");
     contadorTurno++;
 
     //Si aún no se han creado todos los aviones, crear un avión nuevo
@@ -88,19 +89,27 @@ void MainWindow::on_btnTurno_clicked()
     registrarPasajeros();
 
     atender();
+
+    escribirEnConsola("Pasajeros en cola para ser atendidos: " +QString::number(colaSimple->length)+".\n");
+
+    escribirEnConsola(escribirInformacion(listaEscritorios));
+
+    escribirEnConsola("Cantidad de maletas en el sistema: " +QString::number(listaMaletas->length)+".\n");
+
+    escribirEnConsola("///////////////Fin turno " +QString::number(contadorTurno-1) +"///////////////\n");
+
+
     //Revisa si auto esta checkeado para graficar
     if(ui->checkBox->isChecked()){
         graficar();
     }
-
-
 
 }
 
 void MainWindow::on_btnImprimir_clicked()
 {
     graficar();
-    registrarPasajeros();
+
 }
 
 
@@ -142,8 +151,20 @@ int MainWindow::atender(){
         if(aux->escritorio->cola->primero != NULL){
             if(aux->escritorio->cola->primero->pasajero->numeroTurnos>0){
 
+                if(aux->escritorio->pilaDocumentos->length != aux->escritorio->cola->primero->pasajero->documentos){
+                    for(int i = 0; i < aux->escritorio->cola->primero->pasajero->documentos;i++){
+                        push(aux->escritorio->pilaDocumentos);
+                    }
+                }
                 aux->escritorio->cola->primero->pasajero->numeroTurnos--;
             }else{
+                for(int i = 0;i<aux->escritorio->cola->primero->pasajero->maletas;i++){
+                    eliminar(listaMaletas);
+                }
+                for(int i = 0;i<aux->escritorio->cola->primero->pasajero->documentos;i++){
+                    pop(aux->escritorio->pilaDocumentos);
+                }
+
                 dequeue(aux->escritorio->cola);
             }
 
@@ -182,6 +203,11 @@ int MainWindow::desabordaje(ColaDoblementeEnlazada * cola){
             for(int i = 1;i<=cola->primero->avion->pasajeros;i++){
                 Pasajero * pasajero = crearPasajero(contadorPasajeros,cola->primero->avion->id);
                 queue(colaSimple,pasajero);
+
+                for(int i = 0; i < pasajero->maletas; i++){
+                    insertar(listaMaletas);
+                }
+
                 contadorPasajeros++;
             }
 
@@ -201,7 +227,7 @@ int MainWindow::graficar(){
     texto += escribirDOT(cola);
     texto += escribirDOT(colaSimple);
     texto += escribirDOT(listaEscritorios);
-
+    texto += escribirDOT(listaMaletas);
     texto += "}";
 
 
