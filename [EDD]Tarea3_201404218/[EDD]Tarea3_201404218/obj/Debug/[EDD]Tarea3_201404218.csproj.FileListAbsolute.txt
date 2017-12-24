@@ -1,0 +1,9 @@
+C:\Users\David\OneDrive\Diciembre2017\Estructuras de datos\Tarea_ArbolBinario\[EDD]Tarea3_201404218\[EDD]Tarea3_201404218\bin\Debug\[EDD]Tarea3_201404218.exe
+C:\Users\David\OneDrive\Diciembre2017\Estructuras de datos\Tarea_ArbolBinario\[EDD]Tarea3_201404218\[EDD]Tarea3_201404218\bin\Debug\[EDD]Tarea3_201404218.pdb
+C:\Users\David\OneDrive\Diciembre2017\Estructuras de datos\Tarea_ArbolBinario\[EDD]Tarea3_201404218\[EDD]Tarea3_201404218\obj\Debug\[EDD]Tarea3_201404218.csprojResolveAssemblyReference.cache
+C:\Users\David\OneDrive\Diciembre2017\Estructuras de datos\Tarea_ArbolBinario\[EDD]Tarea3_201404218\[EDD]Tarea3_201404218\obj\Debug\_EDD_Tarea3_201404218.Form1.resources
+C:\Users\David\OneDrive\Diciembre2017\Estructuras de datos\Tarea_ArbolBinario\[EDD]Tarea3_201404218\[EDD]Tarea3_201404218\obj\Debug\_EDD_Tarea3_201404218.Properties.Resources.resources
+C:\Users\David\OneDrive\Diciembre2017\Estructuras de datos\Tarea_ArbolBinario\[EDD]Tarea3_201404218\[EDD]Tarea3_201404218\obj\Debug\[EDD]Tarea3_201404218.csproj.GenerateResource.Cache
+C:\Users\David\OneDrive\Diciembre2017\Estructuras de datos\Tarea_ArbolBinario\[EDD]Tarea3_201404218\[EDD]Tarea3_201404218\obj\Debug\[EDD]Tarea3_201404218.csproj.CoreCompileInputs.cache
+C:\Users\David\OneDrive\Diciembre2017\Estructuras de datos\Tarea_ArbolBinario\[EDD]Tarea3_201404218\[EDD]Tarea3_201404218\obj\Debug\[EDD]Tarea3_201404218.exe
+C:\Users\David\OneDrive\Diciembre2017\Estructuras de datos\Tarea_ArbolBinario\[EDD]Tarea3_201404218\[EDD]Tarea3_201404218\obj\Debug\[EDD]Tarea3_201404218.pdb
