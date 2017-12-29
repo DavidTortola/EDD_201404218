@@ -73,6 +73,7 @@ namespace _EDD_Proyecto1_201404218
                 while (aux.siguiente != null)
                 {
                     texto += "\"" + nickname + Convert.ToString(contador) + "\"->\"" + nickname + Convert.ToString(contador + 1) + "\";" + Environment.NewLine;
+                    texto += "\"" + nickname + Convert.ToString(contador+1) + "\"->\"" + nickname + Convert.ToString(contador) + "\";" + Environment.NewLine;
                     contador++;
                     aux = aux.siguiente;
                 }
