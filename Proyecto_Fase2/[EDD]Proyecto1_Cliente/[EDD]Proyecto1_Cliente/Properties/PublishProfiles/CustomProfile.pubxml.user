@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\inetpub\wwwroot\[EDD]Proyecto1_Cliente</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/[EDD]Proyecto1_Cliente.dll">
+      <publishTime>01/08/2018 23:36:17</publishTime>
+    </File>
+    <File Include="bin/[EDD]Proyecto1_Cliente.pdb">
+      <publishTime>01/08/2018 23:36:17</publishTime>
+    </File>
+    <File Include="ColocarUnidades.aspx">
+      <publishTime>01/05/2018 01:54:26</publishTime>
+    </File>
+    <File Include="Juego.aspx">
+      <publishTime>01/08/2018 22:33:41</publishTime>
+    </File>
+    <File Include="Login.aspx">
+      <publishTime>12/28/2017 19:12:17</publishTime>
+    </File>
+    <File Include="MenuAdmin.aspx">
+      <publishTime>01/06/2018 20:01:42</publishTime>
+    </File>
+    <File Include="MenuJuegos.aspx">
+      <publishTime>01/08/2018 21:58:19</publishTime>
+    </File>
+    <File Include="MenuJugador.aspx">
+      <publishTime>01/05/2018 02:04:22</publishTime>
+    </File>
+    <File Include="ReportesMatriz.aspx">
+      <publishTime>01/06/2018 20:01:42</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>12/27/2017 22:32:38</publishTime>
+    </File>
+    <File Include="WebForm1.aspx">
+      <publishTime>01/08/2018 05:43:14</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
