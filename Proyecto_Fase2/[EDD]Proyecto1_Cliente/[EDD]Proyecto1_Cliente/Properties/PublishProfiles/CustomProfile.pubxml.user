@@ -10,10 +10,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/[EDD]Proyecto1_Cliente.dll">
-      <publishTime>01/08/2018 23:36:17</publishTime>
+      <publishTime>01/09/2018 23:22:13</publishTime>
     </File>
     <File Include="bin/[EDD]Proyecto1_Cliente.pdb">
-      <publishTime>01/08/2018 23:36:17</publishTime>
+      <publishTime>01/09/2018 23:22:13</publishTime>
     </File>
     <File Include="ColocarUnidades.aspx">
       <publishTime>01/05/2018 01:54:26</publishTime>
@@ -28,7 +28,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/06/2018 20:01:42</publishTime>
     </File>
     <File Include="MenuJuegos.aspx">
-      <publishTime>01/08/2018 21:58:19</publishTime>
+      <publishTime>01/09/2018 22:46:16</publishTime>
     </File>
     <File Include="MenuJugador.aspx">
       <publishTime>01/05/2018 02:04:22</publishTime>
@@ -37,7 +37,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/06/2018 20:01:42</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/27/2017 22:32:38</publishTime>
+      <publishTime>01/09/2018 22:35:15</publishTime>
     </File>
     <File Include="WebForm1.aspx">
       <publishTime>01/08/2018 05:43:14</publishTime>

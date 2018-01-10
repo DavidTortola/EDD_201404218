@@ -39,11 +39,12 @@ namespace _EDD_Proyecto1_201404218
         public string estadoInicial2 { get; set; }
         public string estadoInicial3 { get; set; }
 
-
+        public string ganador { get; set; }
         public void iniciar()
         {
             if (jugador1 != null && jugador2 != null && datosCargados)
             {
+                WebService1.termino = false;
                 jugador1.unidadesNivel0 = unidadesNivel0;
                 jugador1.unidadesNivel1 = unidadesNivel1;
                 jugador1.unidadesNivel2 = unidadesNivel2;

@@ -16,6 +16,7 @@
         <br />
         <asp:FileUpload ID="FileUpload1" runat="server" />
         <asp:Button ID="Button5" runat="server" OnClick="Button5_Click" Text="Cargar Juego" />
+        <asp:Button ID="Button6" runat="server" OnClick="Button6_Click" Text="Juego Nuevo" />
         <p>
             <asp:TextBox ID="txtNivel0" runat="server"></asp:TextBox>
             Unidades nivel 0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

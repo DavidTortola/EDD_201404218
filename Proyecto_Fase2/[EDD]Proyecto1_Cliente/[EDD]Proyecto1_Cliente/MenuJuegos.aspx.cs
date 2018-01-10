@@ -58,7 +58,7 @@ namespace _EDD_Proyecto1_Cliente
             servidor.colocarTamañoX(txtX.Text);
             servidor.colocarTamañoY(txtY.Text);
             servidor.colocarTipoJuego(DropDownList1.SelectedValue);
-            servidor.cargarDatos();
+            
             
             if (!txtTiempo.Text.Equals(""))
             {
@@ -67,7 +67,7 @@ namespace _EDD_Proyecto1_Cliente
                 minutos = minutos * 60;
                 servidor.colocarTiempo(minutos.ToString());
             }
-            
+            servidor.cargarDatos();
 
             servidor.Close();
 
@@ -267,5 +267,11 @@ namespace _EDD_Proyecto1_Cliente
             }
         }
 
+        protected void Button6_Click(object sender, EventArgs e)
+        {
+            ServidorIPEstatica.WebService1SoapClient servidor = new ServidorIPEstatica.WebService1SoapClient();
+            servidor.terminarJuego();
+            servidor.Close();
+        }
     }
 }

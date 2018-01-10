@@ -263,6 +263,16 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="resultado">
+        <s:complexType />
+      </s:element>
+      <s:element name="resultadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="resultadoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="tiempoTerminado">
         <s:complexType />
       </s:element>
@@ -331,6 +341,12 @@
         </s:complexType>
       </s:element>
       <s:element name="colocarUnidadesNivel3Response">
+        <s:complexType />
+      </s:element>
+      <s:element name="terminarJuego">
+        <s:complexType />
+      </s:element>
+      <s:element name="terminarJuegoResponse">
         <s:complexType />
       </s:element>
       <s:element name="colocarTamañoX">
@@ -745,6 +761,12 @@
   <wsdl:message name="loginSoapOut">
     <wsdl:part name="parameters" element="tns:loginResponse" />
   </wsdl:message>
+  <wsdl:message name="resultadoSoapIn">
+    <wsdl:part name="parameters" element="tns:resultado" />
+  </wsdl:message>
+  <wsdl:message name="resultadoSoapOut">
+    <wsdl:part name="parameters" element="tns:resultadoResponse" />
+  </wsdl:message>
   <wsdl:message name="tiempoTerminadoSoapIn">
     <wsdl:part name="parameters" element="tns:tiempoTerminado" />
   </wsdl:message>
@@ -786,6 +808,12 @@
   </wsdl:message>
   <wsdl:message name="colocarUnidadesNivel3SoapOut">
     <wsdl:part name="parameters" element="tns:colocarUnidadesNivel3Response" />
+  </wsdl:message>
+  <wsdl:message name="terminarJuegoSoapIn">
+    <wsdl:part name="parameters" element="tns:terminarJuego" />
+  </wsdl:message>
+  <wsdl:message name="terminarJuegoSoapOut">
+    <wsdl:part name="parameters" element="tns:terminarJuegoResponse" />
   </wsdl:message>
   <wsdl:message name="colocarTamañoXSoapIn">
     <wsdl:part name="parameters" element="tns:colocarTamañoX" />
@@ -1026,6 +1054,10 @@
       <wsdl:input message="tns:loginSoapIn" />
       <wsdl:output message="tns:loginSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="resultado">
+      <wsdl:input message="tns:resultadoSoapIn" />
+      <wsdl:output message="tns:resultadoSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="tiempoTerminado">
       <wsdl:input message="tns:tiempoTerminadoSoapIn" />
       <wsdl:output message="tns:tiempoTerminadoSoapOut" />
@@ -1053,6 +1085,10 @@
     <wsdl:operation name="colocarUnidadesNivel3">
       <wsdl:input message="tns:colocarUnidadesNivel3SoapIn" />
       <wsdl:output message="tns:colocarUnidadesNivel3SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="terminarJuego">
+      <wsdl:input message="tns:terminarJuegoSoapIn" />
+      <wsdl:output message="tns:terminarJuegoSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="colocarTamañoX">
       <wsdl:input message="tns:colocarTamañoXSoapIn" />
@@ -1355,6 +1391,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="resultado">
+      <soap:operation soapAction="http://tempuri.org/resultado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="tiempoTerminado">
       <soap:operation soapAction="http://tempuri.org/tiempoTerminado" style="document" />
       <wsdl:input>
@@ -1411,6 +1456,15 @@
     </wsdl:operation>
     <wsdl:operation name="colocarUnidadesNivel3">
       <soap:operation soapAction="http://tempuri.org/colocarUnidadesNivel3" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="terminarJuego">
+      <soap:operation soapAction="http://tempuri.org/terminarJuego" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1844,6 +1898,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="resultado">
+      <soap12:operation soapAction="http://tempuri.org/resultado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="tiempoTerminado">
       <soap12:operation soapAction="http://tempuri.org/tiempoTerminado" style="document" />
       <wsdl:input>
@@ -1900,6 +1963,15 @@
     </wsdl:operation>
     <wsdl:operation name="colocarUnidadesNivel3">
       <soap12:operation soapAction="http://tempuri.org/colocarUnidadesNivel3" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="terminarJuego">
+      <soap12:operation soapAction="http://tempuri.org/terminarJuego" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

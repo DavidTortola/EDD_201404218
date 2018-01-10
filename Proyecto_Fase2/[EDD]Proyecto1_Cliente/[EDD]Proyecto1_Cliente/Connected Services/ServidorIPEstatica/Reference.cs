@@ -102,6 +102,10 @@ namespace _EDD_Proyecto1_Cliente.ServidorIPEstatica {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/login", ReplyAction="*")]
         _EDD_Proyecto1_Cliente.ServidorIPEstatica.loginResponse login(_EDD_Proyecto1_Cliente.ServidorIPEstatica.loginRequest request);
         
+        // CODEGEN: Generating message contract since element name resultadoResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/resultado", ReplyAction="*")]
+        _EDD_Proyecto1_Cliente.ServidorIPEstatica.resultadoResponse resultado(_EDD_Proyecto1_Cliente.ServidorIPEstatica.resultadoRequest request);
+        
         // CODEGEN: Generating message contract since element name tiempoTerminadoResult from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/tiempoTerminado", ReplyAction="*")]
         _EDD_Proyecto1_Cliente.ServidorIPEstatica.tiempoTerminadoResponse tiempoTerminado(_EDD_Proyecto1_Cliente.ServidorIPEstatica.tiempoTerminadoRequest request);
@@ -129,6 +133,9 @@ namespace _EDD_Proyecto1_Cliente.ServidorIPEstatica {
         // CODEGEN: Generating message contract since element name valor from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/colocarUnidadesNivel3", ReplyAction="*")]
         _EDD_Proyecto1_Cliente.ServidorIPEstatica.colocarUnidadesNivel3Response colocarUnidadesNivel3(_EDD_Proyecto1_Cliente.ServidorIPEstatica.colocarUnidadesNivel3Request request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/terminarJuego", ReplyAction="*")]
+        void terminarJuego();
         
         // CODEGEN: Generating message contract since element name valor from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/colocarTamañoX", ReplyAction="*")]
@@ -1612,6 +1619,67 @@ namespace _EDD_Proyecto1_Cliente.ServidorIPEstatica {
         
         public loginResponseBody(string loginResult) {
             this.loginResult = loginResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class resultadoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="resultado", Namespace="http://tempuri.org/", Order=0)]
+        public _EDD_Proyecto1_Cliente.ServidorIPEstatica.resultadoRequestBody Body;
+        
+        public resultadoRequest() {
+        }
+        
+        public resultadoRequest(_EDD_Proyecto1_Cliente.ServidorIPEstatica.resultadoRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class resultadoRequestBody {
+        
+        public resultadoRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class resultadoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="resultadoResponse", Namespace="http://tempuri.org/", Order=0)]
+        public _EDD_Proyecto1_Cliente.ServidorIPEstatica.resultadoResponseBody Body;
+        
+        public resultadoResponse() {
+        }
+        
+        public resultadoResponse(_EDD_Proyecto1_Cliente.ServidorIPEstatica.resultadoResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class resultadoResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string resultadoResult;
+        
+        public resultadoResponseBody() {
+        }
+        
+        public resultadoResponseBody(string resultadoResult) {
+            this.resultadoResult = resultadoResult;
         }
     }
     
@@ -3673,6 +3741,18 @@ namespace _EDD_Proyecto1_Cliente.ServidorIPEstatica {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        _EDD_Proyecto1_Cliente.ServidorIPEstatica.resultadoResponse _EDD_Proyecto1_Cliente.ServidorIPEstatica.WebService1Soap.resultado(_EDD_Proyecto1_Cliente.ServidorIPEstatica.resultadoRequest request) {
+            return base.Channel.resultado(request);
+        }
+        
+        public string resultado() {
+            _EDD_Proyecto1_Cliente.ServidorIPEstatica.resultadoRequest inValue = new _EDD_Proyecto1_Cliente.ServidorIPEstatica.resultadoRequest();
+            inValue.Body = new _EDD_Proyecto1_Cliente.ServidorIPEstatica.resultadoRequestBody();
+            _EDD_Proyecto1_Cliente.ServidorIPEstatica.resultadoResponse retVal = ((_EDD_Proyecto1_Cliente.ServidorIPEstatica.WebService1Soap)(this)).resultado(inValue);
+            return retVal.Body.resultadoResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         _EDD_Proyecto1_Cliente.ServidorIPEstatica.tiempoTerminadoResponse _EDD_Proyecto1_Cliente.ServidorIPEstatica.WebService1Soap.tiempoTerminado(_EDD_Proyecto1_Cliente.ServidorIPEstatica.tiempoTerminadoRequest request) {
             return base.Channel.tiempoTerminado(request);
         }
@@ -3754,6 +3834,10 @@ namespace _EDD_Proyecto1_Cliente.ServidorIPEstatica {
             inValue.Body = new _EDD_Proyecto1_Cliente.ServidorIPEstatica.colocarUnidadesNivel3RequestBody();
             inValue.Body.valor = valor;
             _EDD_Proyecto1_Cliente.ServidorIPEstatica.colocarUnidadesNivel3Response retVal = ((_EDD_Proyecto1_Cliente.ServidorIPEstatica.WebService1Soap)(this)).colocarUnidadesNivel3(inValue);
+        }
+        
+        public void terminarJuego() {
+            base.Channel.terminarJuego();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

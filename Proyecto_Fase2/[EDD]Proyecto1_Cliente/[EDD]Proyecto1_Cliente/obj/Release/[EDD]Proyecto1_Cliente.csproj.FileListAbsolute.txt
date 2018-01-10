@@ -5,3 +5,10 @@ C:\Users\David\OneDrive\Diciembre2017\Estructuras de datos\Proyecto1\[EDD]Proyec
 C:\Users\David\OneDrive\Diciembre2017\Estructuras de datos\Proyecto1\[EDD]Proyecto1_Cliente\[EDD]Proyecto1_Cliente\obj\Release\[EDD]Proyecto1_Cliente.csproj.CoreCompileInputs.cache
 C:\Users\David\OneDrive\Diciembre2017\Estructuras de datos\Proyecto1\[EDD]Proyecto1_Cliente\[EDD]Proyecto1_Cliente\obj\Release\[EDD]Proyecto1_Cliente.dll
 C:\Users\David\OneDrive\Diciembre2017\Estructuras de datos\Proyecto1\[EDD]Proyecto1_Cliente\[EDD]Proyecto1_Cliente\obj\Release\[EDD]Proyecto1_Cliente.pdb
+C:\Users\David\Desktop\Proyecto_Fase2\[EDD]Proyecto1_Cliente\[EDD]Proyecto1_Cliente\bin\[EDD]Proyecto1_Cliente.dll.config
+C:\Users\David\Desktop\Proyecto_Fase2\[EDD]Proyecto1_Cliente\[EDD]Proyecto1_Cliente\bin\[EDD]Proyecto1_Cliente.dll
+C:\Users\David\Desktop\Proyecto_Fase2\[EDD]Proyecto1_Cliente\[EDD]Proyecto1_Cliente\bin\[EDD]Proyecto1_Cliente.pdb
+C:\Users\David\Desktop\Proyecto_Fase2\[EDD]Proyecto1_Cliente\[EDD]Proyecto1_Cliente\obj\Release\[EDD]Proyecto1_Cliente.csprojResolveAssemblyReference.cache
+C:\Users\David\Desktop\Proyecto_Fase2\[EDD]Proyecto1_Cliente\[EDD]Proyecto1_Cliente\obj\Release\[EDD]Proyecto1_Cliente.csproj.CoreCompileInputs.cache
+C:\Users\David\Desktop\Proyecto_Fase2\[EDD]Proyecto1_Cliente\[EDD]Proyecto1_Cliente\obj\Release\[EDD]Proyecto1_Cliente.dll
+C:\Users\David\Desktop\Proyecto_Fase2\[EDD]Proyecto1_Cliente\[EDD]Proyecto1_Cliente\obj\Release\[EDD]Proyecto1_Cliente.pdb

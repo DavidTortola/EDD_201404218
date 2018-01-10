@@ -28,8 +28,12 @@ namespace _EDD_Proyecto1_Cliente
                     else
                     {
                         Timer1.Enabled = false;
-                        txtResultado.Text = servidor.tiempoTerminado();
-                        lblTiempo.Text = "Tiempo terminado.";
+                        string asf = servidor.tiempoTerminado();
+                        if (!asf.Equals("")){
+
+                            lblResultados.Text = asf;
+                            lblTiempo.Text = "Tiempo terminado.";
+                        }
                     }
 
                 }
@@ -78,7 +82,22 @@ namespace _EDD_Proyecto1_Cliente
                 Timer1.Enabled = false;
             }
             TextBox12.Text = servidor.obtenerConsola();
-            txtResultado.Text  = servidor.finDelJuego();
+            /*
+            string jlk = servidor.finDelJuego();
+            if (!jlk.Equals(""))
+            {
+
+                lblResultados.Text = jlk;
+            }
+            */
+            lblResultados.Text = servidor.resultado();
+
+            if (servidor.estaIniciado().Equals("false"))
+            {
+                Response.Redirect("Login.aspx");
+            }
+
+
             servidor.Close();
 
             if (Session["Admin"] != null)

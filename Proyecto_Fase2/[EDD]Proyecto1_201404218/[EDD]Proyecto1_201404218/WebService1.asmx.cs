@@ -251,7 +251,19 @@ namespace _EDD_Proyecto1_201404218
         }
 
 
-
+        [WebMethod]
+        public string resultado()
+        {
+            if(partida != null)
+            {
+                if(termino == true)
+                {
+                    return "El ganador es: " + partida.ganador;
+                }
+                return "";
+            }
+            return "";
+        }
 
         [WebMethod]
         public string tiempoTerminado()
@@ -261,21 +273,29 @@ namespace _EDD_Proyecto1_201404218
 
                 if (partida != null)
                 {
-                    if (partida.jugador1.unidades > partida.jugador2.unidades)
+                    if (termino == false)
                     {
-                        insertarJuego(partida.jugador1.nombre, partida.jugador2.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), true);
-                        insertarJuego(partida.jugador2.nombre, partida.jugador1.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), false);
-                        return "Ha ganado el jugador " + partida.jugador1.nombre;
-                    }
-                    else if (partida.jugador1.unidades < partida.jugador2.unidades)
-                    {
-                        insertarJuego(partida.jugador1.nombre, partida.jugador2.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), false);
-                        insertarJuego(partida.jugador2.nombre, partida.jugador1.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), true);
-                        return "Ha ganado el jugador " + partida.jugador2.nombre;
-                    }
-                    else
-                    {
-                        return "Ha sido un empate";
+                        if (partida.jugador1.unidades > partida.jugador2.unidades)
+                        {
+                            insertarJuego(partida.jugador1.nombre, partida.jugador2.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), true);
+                            insertarJuego(partida.jugador2.nombre, partida.jugador1.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), false);
+                            termino = true;
+                            partida.ganador = partida.jugador1.nombre;
+                            return "Ha ganado el jugador " + partida.jugador1.nombre;
+                        }
+                        else if (partida.jugador1.unidades < partida.jugador2.unidades)
+                        {
+                            insertarJuego(partida.jugador1.nombre, partida.jugador2.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), false);
+                            insertarJuego(partida.jugador2.nombre, partida.jugador1.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), true);
+                            termino = true;
+                            partida.ganador = partida.jugador2.nombre;
+                            return "Ha ganado el jugador " + partida.jugador2.nombre;
+                        }
+                        else
+                        {
+                            termino = true;
+                            return "Ha sido un empate";
+                        }
                     }
 
                 }
@@ -286,6 +306,7 @@ namespace _EDD_Proyecto1_201404218
             return "";
         }
 
+        public static bool termino = false;
 
         [WebMethod]
         public string finDelJuego()
@@ -294,22 +315,29 @@ namespace _EDD_Proyecto1_201404218
             {
                 if (partida != null)
                 {
-                    if (partida.jugador2.unidades == 0)
+                    if (termino == false)
                     {
+                        if (partida.jugador2.unidades == 0)
+                        {
 
-                        insertarJuego(partida.jugador1.nombre, partida.jugador2.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), true);
-                        insertarJuego(partida.jugador2.nombre, partida.jugador1.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), false);
-                        return "Ha ganado el jugador " + partida.jugador1.nombre;
-                    }
-                    else if (partida.jugador1.unidades == 0)
-                    {
-                        insertarJuego(partida.jugador1.nombre, partida.jugador2.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), false);
-                        insertarJuego(partida.jugador2.nombre, partida.jugador1.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), true);
-                        return "Ha ganado el jugador " + partida.jugador2.nombre;
-                    }
-                    else
-                    {
-                        return "";
+                            insertarJuego(partida.jugador1.nombre, partida.jugador2.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), true);
+                            insertarJuego(partida.jugador2.nombre, partida.jugador1.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), false);
+                            termino = true;
+                            partida.ganador = partida.jugador1.nombre;
+                            return "Ha ganado el jugador " + partida.jugador1.nombre;
+                        }
+                        else if (partida.jugador1.unidades == 0)
+                        {
+                            insertarJuego(partida.jugador1.nombre, partida.jugador2.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), false);
+                            insertarJuego(partida.jugador2.nombre, partida.jugador1.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), true);
+                            termino = true;
+                            partida.ganador = partida.jugador2.nombre;
+                            return "Ha ganado el jugador " + partida.jugador2.nombre;
+                        }
+                        else
+                        {
+                            return "";
+                        }
                     }
 
                 }
@@ -386,6 +414,21 @@ namespace _EDD_Proyecto1_201404218
 
             }
         }
+
+        [WebMethod]
+        public void terminarJuego()
+        {
+            try
+            {
+                partida = new Partida();
+                termino = false;
+
+            }catch(Exception e)
+            {
+
+            }
+        }
+
 
         [WebMethod]
         public void colocarTamañoX(string valor)
@@ -947,7 +990,10 @@ namespace _EDD_Proyecto1_201404218
 
                                                 if(partida.jugador1.unidades <= 0)
                                                 {
-                                                    //La partida ha terminado
+                                                    insertarJuego(partida.jugador1.nombre, partida.jugador2.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), false);
+                                                    insertarJuego(partida.jugador2.nombre, partida.jugador1.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), true);
+                                                    termino = true;
+                                                    partida.ganador = partida.jugador2.nombre;
                                                 }
 
                                                 return "La unidad de " + aux2.unidad.usuario + " ha sido destruida.";
@@ -958,7 +1004,10 @@ namespace _EDD_Proyecto1_201404218
 
                                                 if(partida.jugador2.unidades <= 0)
                                                 {
-                                                    //La partida ha terminado
+                                                    insertarJuego(partida.jugador1.nombre, partida.jugador2.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), true);
+                                                    insertarJuego(partida.jugador2.nombre, partida.jugador1.nombre, partida.getDesplegadas(), partida.getSobrevivientes(), (partida.getDesplegadas() - partida.getSobrevivientes()), false);
+                                                    termino = true;
+                                                    partida.ganador = partida.jugador1.nombre;
                                                 }
 
 
